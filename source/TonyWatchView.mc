@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 using Toybox.Lang as Lang;
+using Toybox.FitnessEquipment as FE;
 
 class TonyWatchView extends Ui.WatchFace {
 
@@ -27,6 +28,12 @@ class TonyWatchView extends Ui.WatchFace {
         var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
         var view = View.findDrawableById("TimeLabel");
         view.setText(timeString);
+
+        var heartRate = FE.getEquipmentData().feHeartRate;
+        var hrString = Lang.format("$1 bpm", [heartRate]);
+        var hrView = View.findDrawableById("HRLabel");
+        hrView.setText(hrString);
+
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
